@@ -24,11 +24,6 @@
         <field name="arch" type="xml">
             <form string="Abonado">
                 <header>
-                    <button name="%(action_gym_booking)d"
-                            type="action"
-                            string="Ver reservas"
-                            class="oe_stat_button"
-                            icon="fa-calendar"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="active,inactive"/>
                 </header>
