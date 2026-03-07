@@ -59,9 +59,8 @@
                         <page string="Sesiones semanales" name="subscriptions">
                             <field name="subscription_line_ids">
                                 <list editable="bottom">
-                                    <field name="activity_id"/>
-                                    <field name="schedule_id"
-                                           domain="[('activity_id', '=', activity_id)]"/>
+                                    <field name="schedule_id"/>
+                                    <field name="activity_id" readonly="1"/>
                                     <field name="day_of_week" readonly="1"/>
                                     <field name="time_start" widget="float_time" readonly="1"/>
                                     <field name="sessions_per_week"/>

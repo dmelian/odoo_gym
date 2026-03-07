@@ -55,3 +55,16 @@ class GymSchedule(models.Model):
                 raise ValidationError(
                     'La hora de fin debe ser posterior a la hora de inicio.'
                 )
+
+    @api.depends('activity_id', 'day_of_week', 'time_start')
+    def _compute_display_name(self):
+        day_names = {
+            '0': 'Lunes', '1': 'Martes', '2': 'Miércoles',
+            '3': 'Jueves', '4': 'Viernes', '5': 'Sábado', '6': 'Domingo'
+        }
+        for record in self:
+            hours = int(record.time_start)
+            minutes = int((record.time_start - hours) * 60)
+            time_str = f"{hours:02d}:{minutes:02d}"
+            day_str = day_names.get(record.day_of_week, '')
+            record.display_name = f"{record.activity_id.name} - {day_str} {time_str}"
