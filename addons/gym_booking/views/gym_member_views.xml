@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista lista -->
+    <record id="view_gym_member_list" model="ir.ui.view">
+        <field name="name">gym.member.list</field>
+        <field name="model">gym.member</field>
+        <field name="arch" type="xml">
+            <list string="Abonados">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="date_start"/>
+                <field name="state"/>
+                <field name="booking_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record id="view_gym_member_form" model="ir.ui.view">
+        <field name="name">gym.member.form</field>
+        <field name="model">gym.member</field>
+        <field name="arch" type="xml">
+            <form string="Abonado">
+                <header>
+                    <button name="%(action_gym_booking)d"
+                            type="action"
+                            string="Ver reservas"
+                            class="oe_stat_button"
+                            icon="fa-calendar"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="active,inactive"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_gym_booking)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-calendar">
+                            <field name="booking_count"
+                                   widget="statinfo"
+                                   string="Reservas"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del abonado"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Datos de contacto">
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Datos del abono">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sesiones semanales" name="subscriptions">
+                            <field name="subscription_line_ids">
+                                <list editable="bottom">
+                                    <field name="activity_id"/>
+                                    <field name="schedule_id"
+                                           domain="[('activity_id', '=', activity_id)]"/>
+                                    <field name="day_of_week" readonly="1"/>
+                                    <field name="time_start" widget="float_time" readonly="1"/>
+                                    <field name="sessions_per_week"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Reservas" name="bookings">
+                            <field name="booking_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="activity_id"/>
+                                    <field name="date"/>
+                                    <field name="time_start" widget="float_time"/>
+                                    <field name="state"/>
+                                    <field name="origin"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista kanban -->
+    <record id="view_gym_member_kanban" model="ir.ui.view">
+        <field name="name">gym.member.kanban</field>
+        <field name="model">gym.member</field>
+        <field name="arch" type="xml">
+            <kanban string="Abonados">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="state"/>
+                <field name="booking_count"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_top_right">
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'active'"
+                                           decoration-danger="state == 'inactive'"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <field name="email"/>
+                                <br/>
+                                <field name="phone"/>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <span class="badge bg-primary">
+                                        <i class="fa fa-calendar me-1"/>
+                                        <field name="booking_count"/> reservas
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vista búsqueda -->
+    <record id="view_gym_member_search" model="ir.ui.view">
+        <field name="name">gym.member.search</field>
+        <field name="model">gym.member</field>
+        <field name="arch" type="xml">
+            <search string="Buscar abonados">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <filter name="active" string="Activos"
+                        domain="[('state', '=', 'active')]"/>
+                <filter name="inactive" string="Baja"
+                        domain="[('state', '=', 'inactive')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_state" string="Estado"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_gym_member" model="ir.actions.act_window">
+        <field name="name">Abonados</field>
+        <field name="res_model">gym.member</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_gym_member_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Añade tu primer abonado
+            </p>
+        </field>
+    </record>
+
+</odoo>

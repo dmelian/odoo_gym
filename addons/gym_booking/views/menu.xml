@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menú raíz -->
+    <menuitem id="menu_gym_root"
+              name="Gimnasio"
+              sequence="10"/>
+
+    <!-- Menú Reservas -->
+    <menuitem id="menu_gym_bookings"
+              name="Reservas"
+              parent="menu_gym_root"
+              sequence="10"/>
+
+    <menuitem id="menu_gym_booking_list"
+              name="Todas las reservas"
+              parent="menu_gym_bookings"
+              action="action_gym_booking"
+              sequence="10"/>
+
+    <!-- Menú Abonados -->
+    <menuitem id="menu_gym_members"
+              name="Abonados"
+              parent="menu_gym_root"
+              sequence="20"/>
+
+    <menuitem id="menu_gym_member_list"
+              name="Abonados"
+              parent="menu_gym_members"
+              action="action_gym_member"
+              sequence="10"/>
+
+    <menuitem id="menu_gym_subscription_list"
+              name="Suscripciones"
+              parent="menu_gym_members"
+              action="action_gym_subscription"
+              sequence="20"/>
+
+    <!-- Menú Configuración -->
+    <menuitem id="menu_gym_config"
+              name="Configuración"
+              parent="menu_gym_root"
+              sequence="30"/>
+
+    <menuitem id="menu_gym_activity_list"
+              name="Actividades"
+              parent="menu_gym_config"
+              action="action_gym_activity"
+              sequence="10"/>
+
+    <menuitem id="menu_gym_schedule_list"
+              name="Horarios"
+              parent="menu_gym_config"
+              action="action_gym_schedule"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista lista -->
+    <record id="view_gym_booking_list" model="ir.ui.view">
+        <field name="name">gym.booking.list</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <list string="Reservas"
+                  decoration-danger="state == 'cancelled'"
+                  decoration-success="state == 'attended'"
+                  decoration-info="state == 'confirmed'">
+                <field name="name"/>
+                <field name="member_id"/>
+                <field name="activity_id"/>
+                <field name="date"/>
+                <field name="time_start" widget="float_time"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'attended'"
+                       decoration-danger="state == 'cancelled'"
+                       decoration-info="state == 'confirmed'"/>
+                <field name="origin"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record id="view_gym_booking_form" model="ir.ui.view">
+        <field name="name">gym.booking.form</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <form string="Reserva">
+                <header>
+                    <button name="action_confirm"
+                            string="Confirmar"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'cancelled'"/>
+                    <button name="action_attended"
+                            string="Marcar asistencia"
+                            type="object"
+                            class="btn-success"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_cancel"
+                            string="Cancelar"
+                            type="object"
+                            class="btn-danger"
+                            invisible="state == 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="confirmed,attended,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Reserva">
+                            <field name="member_id"/>
+                            <field name="schedule_id"/>
+                            <field name="activity_id" readonly="1"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Detalles">
+                            <field name="time_start" widget="float_time" readonly="1"/>
+                            <field name="capacity" readonly="1"/>
+                            <field name="bookings_count" readonly="1"/>
+                            <field name="origin" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista kanban -->
+    <record id="view_gym_booking_kanban" model="ir.ui.view">
+        <field name="name">gym.booking.kanban</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <kanban string="Reservas" default_group_by="state">
+                <field name="name"/>
+                <field name="member_id"/>
+                <field name="activity_id"/>
+                <field name="date"/>
+                <field name="time_start"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="member_id"/>
+                                    </strong>
+                                    <small class="o_kanban_record_subtitle">
+                                        <field name="name"/>
+                                    </small>
+                                </div>
+                                <div class="o_kanban_record_top_right">
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'attended'"
+                                           decoration-danger="state == 'cancelled'"
+                                           decoration-info="state == 'confirmed'"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <field name="activity_id"/>
+                                <br/>
+                                <i class="fa fa-calendar me-1"/>
+                                <field name="date"/>
+                                <span class="ms-2">
+                                    <i class="fa fa-clock-o me-1"/>
+                                    <field name="time_start" widget="float_time"/>
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vista calendario -->
+    <record id="view_gym_booking_calendar" model="ir.ui.view">
+        <field name="name">gym.booking.calendar</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <calendar string="Reservas"
+                      date_start="date"
+                      date_stop="date"
+                      color="activity_id"
+                      mode="week">
+                <field name="member_id"/>
+                <field name="activity_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vista búsqueda -->
+    <record id="view_gym_booking_search" model="ir.ui.view">
+        <field name="name">gym.booking.search</field>
+        <field name="model">gym.booking</field>
+        <field name="arch" type="xml">
+            <search string="Buscar reservas">
+                <field name="name"/>
+                <field name="member_id"/>
+                <field name="activity_id"/>
+                <filter name="confirmed" string="Confirmadas"
+                        domain="[('state', '=', 'confirmed')]"/>
+                <filter name="attended" string="Asistidas"
+                        domain="[('state', '=', 'attended')]"/>
+                <filter name="cancelled" string="Canceladas"
+                        domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter name="today" string="Hoy"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="week" string="Esta semana"
+                        domain="[('date', '>=', (context_today() + relativedelta(weekday=0, days=-6)).strftime('%Y-%m-%d')),
+                                 ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="automatic" string="Automáticas"
+                        domain="[('origin', '=', 'automatic')]"/>
+                <filter name="manual" string="Manuales"
+                        domain="[('origin', '=', 'manual')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_member" string="Abonado"
+                            context="{'group_by': 'member_id'}"/>
+                    <filter name="group_activity" string="Actividad"
+                            context="{'group_by': 'activity_id'}"/>
+                    <filter name="group_date" string="Fecha"
+                            context="{'group_by': 'date'}"/>
+                    <filter name="group_state" string="Estado"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_gym_booking" model="ir.actions.act_window">
+        <field name="name">Reservas</field>
+        <field name="res_model">gym.booking</field>
+        <field name="view_mode">list,kanban,calendar,form</field>
+        <field name="search_view_id" ref="view_gym_booking_search"/>
+        <field name="context">{'search_default_confirmed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea la primera reserva
+            </p>
+        </field>
+    </record>
+
+</odoo>

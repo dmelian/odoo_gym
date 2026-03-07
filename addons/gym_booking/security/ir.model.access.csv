@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gym_activity,gym.activity,model_gym_activity,base.group_user,1,1,1,1
+access_gym_schedule,gym.schedule,model_gym_schedule,base.group_user,1,1,1,1
+access_gym_member,gym.member,model_gym_member,base.group_user,1,1,1,1
+access_gym_subscription_line,gym.subscription.line,model_gym_subscription_line,base.group_user,1,1,1,1
+access_gym_booking,gym.booking,model_gym_booking,base.group_user,1,1,1,1

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista lista -->
+    <record id="view_gym_activity_list" model="ir.ui.view">
+        <field name="name">gym.activity.list</field>
+        <field name="model">gym.activity</field>
+        <field name="arch" type="xml">
+            <list string="Actividades">
+                <field name="name"/>
+                <field name="capacity"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record id="view_gym_activity_form" model="ir.ui.view">
+        <field name="name">gym.activity.form</field>
+        <field name="model">gym.activity</field>
+        <field name="arch" type="xml">
+            <form string="Actividad">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la actividad"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista búsqueda -->
+    <record id="view_gym_activity_search" model="ir.ui.view">
+        <field name="name">gym.activity.search</field>
+        <field name="model">gym.activity</field>
+        <field name="arch" type="xml">
+            <search string="Buscar actividades">
+                <field name="name"/>
+                <filter name="active" string="Activas" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archivadas" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_gym_activity" model="ir.actions.act_window">
+        <field name="name">Actividades</field>
+        <field name="res_model">gym.activity</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_gym_activity_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primera actividad
+            </p>
+        </field>
+    </record>
+
+</odoo>
