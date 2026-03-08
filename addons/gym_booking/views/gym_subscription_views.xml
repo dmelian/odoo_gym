@@ -12,7 +12,6 @@
                 <field name="schedule_id"/>
                 <field name="day_of_week"/>
                 <field name="time_start" widget="float_time"/>
-                <field name="sessions_per_week"/>
                 <field name="active"/>
             </list>
         </field>
@@ -37,9 +36,6 @@
                                    domain="[('activity_id', '=', activity_id)]"/>
                             <field name="day_of_week" readonly="1"/>
                             <field name="time_start" widget="float_time" readonly="1"/>
-                        </group>
-                        <group string="Configuración">
-                            <field name="sessions_per_week"/>
                             <field name="active"/>
                         </group>
                     </group>

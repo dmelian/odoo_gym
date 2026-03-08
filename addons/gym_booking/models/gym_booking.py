@@ -139,6 +139,21 @@ class GymBooking(models.Model):
                     f'a las {record.time_start}h ese día.'
                 )
 
+            # Regla 4: el día de la semana de la fecha debe coincidir con el horario
+            if record.date and record.schedule_id:
+                # date.weekday() devuelve 0=lunes, 1=martes... igual que nuestro Selection
+                day_of_date = str(record.date.weekday())
+                if day_of_date != record.schedule_id.day_of_week:
+                    day_names = {
+                        '0': 'Lunes', '1': 'Martes', '2': 'Miércoles',
+                        '3': 'Jueves', '4': 'Viernes', '5': 'Sábado', '6': 'Domingo'
+                    }
+                    expected_day = day_names.get(record.schedule_id.day_of_week, '')
+                    raise ValidationError(
+                        f'La fecha elegida no es un {expected_day}. '
+                        f'Este horario solo se imparte los {expected_day}s.'
+                    )
+                    
     def action_cancel(self):
         for record in self:
             record.state = 'cancelled'

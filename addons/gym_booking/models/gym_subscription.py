@@ -18,11 +18,6 @@ class GymSubscriptionLine(models.Model):
         required=True,
         ondelete='restrict'
     )
-    sessions_per_week = fields.Integer(
-        string='Sesiones por semana',
-        required=True,
-        default=1
-    )
     active = fields.Boolean(
         string='Activo',
         default=True
@@ -54,10 +49,3 @@ class GymSubscriptionLine(models.Model):
         )
     ]
 
-    @api.constrains('sessions_per_week')
-    def _check_sessions_per_week(self):
-        for record in self:
-            if record.sessions_per_week < 1:
-                raise ValidationError(
-                    'El número de sesiones por semana debe ser al menos 1.'
-                )
