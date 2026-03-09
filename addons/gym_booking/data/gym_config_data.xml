@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="gym_config_default" model="gym.config">
+            <field name="name">Configuración</field>
+            <field name="auto_generate" eval="False"/>
+            <field name="generation_day">3</field>
+            <field name="generation_hour">8.0</field>
+        </record>
+    </data>
+</odoo>

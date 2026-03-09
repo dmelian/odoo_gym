@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_gym_config_form" model="ir.ui.view">
+        <field name="name">gym.config.form</field>
+        <field name="model">gym.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración del gimnasio">
+                <header>
+                    <button name="action_generate_bookings_manual"
+                            string="Generar reservas ahora"
+                            type="object"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group string="Generación automática de reservas">
+                        <field name="auto_generate"/>
+                        <field name="generation_day"
+                               invisible="not auto_generate"/>
+                        <field name="generation_hour"
+                               widget="float_time"
+                               invisible="not auto_generate"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gym_config" model="ir.actions.act_window">
+        <field name="name">Configuración</field>
+        <field name="res_model">gym.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+
+</odoo>
