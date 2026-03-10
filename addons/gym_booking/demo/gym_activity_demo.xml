@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="activity_yoga" model="gym.activity">
+            <field name="name">Yoga</field>
+            <field name="description">Clase de yoga para todos los niveles</field>
+            <field name="capacity">20</field>
+        </record>
+
+        <record id="activity_spinning" model="gym.activity">
+            <field name="name">Spinning</field>
+            <field name="description">Clase de ciclismo indoor de alta intensidad</field>
+            <field name="capacity">15</field>
+        </record>
+
+        <record id="activity_pilates" model="gym.activity">
+            <field name="name">Pilates</field>
+            <field name="description">Ejercicios de control corporal y respiración</field>
+            <field name="capacity">8</field>
+        </record>
+
+        <record id="activity_zumba" model="gym.activity">
+            <field name="name">Zumba</field>
+            <field name="description">Baile fitness con ritmos latinos</field>
+            <field name="capacity">20</field>
+        </record>
+
+    </data>
+</odoo>

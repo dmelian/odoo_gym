@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="member_ana" model="gym.member">
+            <field name="name">Ana García</field>
+            <field name="email">ana.garcia@email.com</field>
+            <field name="phone">612345678</field>
+            <field name="date_start">2024-01-10</field>
+            <field name="state">active</field>
+        </record>
+
+        <record id="member_carlos" model="gym.member">
+            <field name="name">Carlos López</field>
+            <field name="email">carlos.lopez@email.com</field>
+            <field name="phone">623456789</field>
+            <field name="date_start">2024-02-15</field>
+            <field name="state">active</field>
+        </record>
+
+        <record id="member_maria" model="gym.member">
+            <field name="name">María Martínez</field>
+            <field name="email">maria.martinez@email.com</field>
+            <field name="phone">634567890</field>
+            <field name="date_start">2024-03-01</field>
+            <field name="state">active</field>
+        </record>
+
+        <record id="member_juan" model="gym.member">
+            <field name="name">Juan Pérez</field>
+            <field name="email">juan.perez@email.com</field>
+            <field name="phone">645678901</field>
+            <field name="date_start">2024-01-20</field>
+            <field name="state">active</field>
+        </record>
+
+        <record id="member_laura" model="gym.member">
+            <field name="name">Laura Sánchez</field>
+            <field name="email">laura.sanchez@email.com</field>
+            <field name="phone">656789012</field>
+            <field name="date_start">2023-09-01</field>
+            <field name="state">active</field>
+        </record>
+
+    </data>
+</odoo>

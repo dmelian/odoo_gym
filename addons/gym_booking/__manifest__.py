@@ -20,7 +20,12 @@
         'views/gym_config_views.xml',
         'views/menu.xml',
     ],
-    'demo': [],
+    'demo': [
+        'demo/gym_activity_demo.xml',
+        'demo/gym_schedule_demo.xml',
+        'demo/gym_member_demo.xml',
+        'demo/gym_subscription_demo.xml',
+    ],
     'installable': True,
     'application': True,
     'license': 'LGPL-3',

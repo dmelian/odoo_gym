@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Yoga: lunes, miércoles y viernes a las 9:00 -->
+        <record id="schedule_yoga_mon" model="gym.schedule">
+            <field name="activity_id" ref="activity_yoga"/>
+            <field name="day_of_week">0</field>
+            <field name="time_start">9.0</field>
+            <field name="time_end">10.0</field>
+        </record>
+
+        <record id="schedule_yoga_wed" model="gym.schedule">
+            <field name="activity_id" ref="activity_yoga"/>
+            <field name="day_of_week">2</field>
+            <field name="time_start">9.0</field>
+            <field name="time_end">10.0</field>
+        </record>
+
+        <record id="schedule_yoga_fri" model="gym.schedule">
+            <field name="activity_id" ref="activity_yoga"/>
+            <field name="day_of_week">4</field>
+            <field name="time_start">9.0</field>
+            <field name="time_end">10.0</field>
+        </record>
+
+        <!-- Spinning: martes y jueves a las 10:00 -->
+        <record id="schedule_spinning_tue" model="gym.schedule">
+            <field name="activity_id" ref="activity_spinning"/>
+            <field name="day_of_week">1</field>
+            <field name="time_start">10.0</field>
+            <field name="time_end">11.0</field>
+        </record>
+
+        <record id="schedule_spinning_thu" model="gym.schedule">
+            <field name="activity_id" ref="activity_spinning"/>
+            <field name="day_of_week">3</field>
+            <field name="time_start">10.0</field>
+            <field name="time_end">11.0</field>
+        </record>
+
+        <!-- Pilates: lunes y miércoles a las 11:00 -->
+        <record id="schedule_pilates_mon" model="gym.schedule">
+            <field name="activity_id" ref="activity_pilates"/>
+            <field name="day_of_week">0</field>
+            <field name="time_start">11.0</field>
+            <field name="time_end">12.0</field>
+        </record>
+
+        <record id="schedule_pilates_wed" model="gym.schedule">
+            <field name="activity_id" ref="activity_pilates"/>
+            <field name="day_of_week">2</field>
+            <field name="time_start">11.0</field>
+            <field name="time_end">12.0</field>
+        </record>
+
+        <!-- Zumba: viernes a las 18:00 -->
+        <record id="schedule_zumba_fri" model="gym.schedule">
+            <field name="activity_id" ref="activity_zumba"/>
+            <field name="day_of_week">4</field>
+            <field name="time_start">18.0</field>
+            <field name="time_end">19.0</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Ana: Yoga lunes y miércoles -->
+        <record id="sub_ana_yoga_mon" model="gym.subscription.line">
+            <field name="member_id" ref="member_ana"/>
+            <field name="schedule_id" ref="schedule_yoga_mon"/>
+        </record>
+
+        <record id="sub_ana_yoga_wed" model="gym.subscription.line">
+            <field name="member_id" ref="member_ana"/>
+            <field name="schedule_id" ref="schedule_yoga_wed"/>
+        </record>
+
+        <!-- Carlos: Spinning martes y jueves -->
+        <record id="sub_carlos_spinning_tue" model="gym.subscription.line">
+            <field name="member_id" ref="member_carlos"/>
+            <field name="schedule_id" ref="schedule_spinning_tue"/>
+        </record>
+
+        <record id="sub_carlos_spinning_thu" model="gym.subscription.line">
+            <field name="member_id" ref="member_carlos"/>
+            <field name="schedule_id" ref="schedule_spinning_thu"/>
+        </record>
+
+        <!-- María: Pilates lunes y Zumba viernes -->
+        <record id="sub_maria_pilates_mon" model="gym.subscription.line">
+            <field name="member_id" ref="member_maria"/>
+            <field name="schedule_id" ref="schedule_pilates_mon"/>
+        </record>
+
+        <record id="sub_maria_zumba_fri" model="gym.subscription.line">
+            <field name="member_id" ref="member_maria"/>
+            <field name="schedule_id" ref="schedule_zumba_fri"/>
+        </record>
+
+        <!-- Juan: Yoga viernes y Spinning martes -->
+        <record id="sub_juan_yoga_fri" model="gym.subscription.line">
+            <field name="member_id" ref="member_juan"/>
+            <field name="schedule_id" ref="schedule_yoga_fri"/>
+        </record>
+
+        <record id="sub_juan_spinning_tue" model="gym.subscription.line">
+            <field name="member_id" ref="member_juan"/>
+            <field name="schedule_id" ref="schedule_spinning_tue"/>
+        </record>
+
+        <!-- Laura: Pilates miércoles y Yoga lunes -->
+        <record id="sub_laura_pilates_wed" model="gym.subscription.line">
+            <field name="member_id" ref="member_laura"/>
+            <field name="schedule_id" ref="schedule_pilates_wed"/>
+        </record>
+
+        <record id="sub_laura_yoga_mon" model="gym.subscription.line">
+            <field name="member_id" ref="member_laura"/>
+            <field name="schedule_id" ref="schedule_yoga_mon"/>
+        </record>
+
+    </data>
+</odoo>
