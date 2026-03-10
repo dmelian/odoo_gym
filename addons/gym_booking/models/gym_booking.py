@@ -79,6 +79,12 @@ class GymBooking(models.Model):
         compute='_compute_bookings_count'
     )
 
+    batch_id = fields.Many2one(
+        comodel_name='gym.booking.batch',
+        string='Lote',
+        readonly=True
+    )
+
     @api.depends('schedule_id', 'date')
     def _compute_bookings_count(self):
         for record in self:
@@ -100,20 +106,17 @@ class GymBooking(models.Model):
     
     @api.model
     def _generate_weekly_bookings(self, force=False):
-        # Comprueba si la generación automática está activada
         if not force:
             config = self.env['gym.config'].search([], limit=1)
             if config and not config.auto_generate:
                 return
 
         today = fields.Date.today()
-        # Calcula el lunes de la semana siguiente
         days_until_monday = (7 - today.weekday()) % 7
         if days_until_monday == 0:
             days_until_monday = 7
         next_monday = today + timedelta(days=days_until_monday)
 
-        # Recorre todas las suscripciones activas
         subscriptions = self.env['gym.subscription.line'].search([
             ('active', '=', True),
             ('member_id.state', '=', 'active'),
@@ -121,13 +124,16 @@ class GymBooking(models.Model):
 
         created = 0
         skipped = 0
+        origin = 'manual' if force else 'automatic'
+
+        batch = self.env['gym.booking.batch'].create({
+            'origin': origin,
+        })
 
         for sub in subscriptions:
-            # Calcula la fecha concreta de la sesión la semana siguiente
             day_offset = int(sub.schedule_id.day_of_week)
             booking_date = next_monday + timedelta(days=day_offset)
 
-            # Comprueba si ya existe la reserva
             existing = self.search_count([
                 ('member_id', '=', sub.member_id.id),
                 ('schedule_id', '=', sub.schedule_id.id),
@@ -138,14 +144,12 @@ class GymBooking(models.Model):
                 skipped += 1
                 continue
 
-            # Comprueba aforo disponible
             confirmed = self.search_count([
                 ('schedule_id', '=', sub.schedule_id.id),
                 ('date', '=', booking_date),
                 ('state', '=', 'confirmed'),
             ])
             if confirmed >= sub.schedule_id.capacity:
-                # Avisa al abonado en el chatter
                 sub.member_id.message_post(
                     body=f'No se ha podido generar la reserva automática de '
                         f'{sub.activity_id.name} para el {booking_date} '
@@ -155,17 +159,22 @@ class GymBooking(models.Model):
                 skipped += 1
                 continue
 
-            # Crea la reserva
             self.create({
                 'member_id': sub.member_id.id,
                 'schedule_id': sub.schedule_id.id,
                 'date': booking_date,
                 'state': 'confirmed',
-                'origin': 'automatic',
+                'origin': origin,
+                'batch_id': batch.id,
             })
             created += 1
 
-        return f'Generadas {created} reservas. Omitidas {skipped}.'    
+        batch.write({
+            'bookings_created': created,
+            'bookings_skipped': skipped,
+        })
+
+        return f'Generadas {created} reservas. Omitidas {skipped}.'
 
     @api.constrains('schedule_id', 'date', 'member_id', 'state')
     def _check_booking(self):

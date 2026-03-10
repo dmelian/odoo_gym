@@ -14,6 +14,7 @@
         'data/cron.xml',
         'views/gym_activity_views.xml',
         'views/gym_schedule_views.xml',
+        'views/gym_booking_batch_views.xml',
         'views/gym_booking_views.xml',
         'views/gym_member_views.xml',
         'views/gym_subscription_views.xml',

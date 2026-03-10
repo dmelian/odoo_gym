@@ -5,3 +5,4 @@ access_gym_member,gym.member,model_gym_member,base.group_user,1,1,1,1
 access_gym_subscription_line,gym.subscription.line,model_gym_subscription_line,base.group_user,1,1,1,1
 access_gym_booking,gym.booking,model_gym_booking,base.group_user,1,1,1,1
 access_gym_config,gym.config,model_gym_config,base.group_user,1,1,1,1
+access_gym_booking_batch,gym.booking.batch,model_gym_booking_batch,base.group_user,1,1,1,0

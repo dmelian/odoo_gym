@@ -20,6 +20,7 @@
                        decoration-danger="state == 'cancelled'"
                        decoration-info="state == 'confirmed'"/>
                 <field name="origin"/>
+                <field name="batch_id"/>
             </list>
         </field>
     </record>
