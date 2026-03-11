@@ -24,12 +24,31 @@ class GymConfig(models.Model):
         required=True
     )
 
+    # Franjas horarias del grid semanal
+    morning_start = fields.Float(string='Inicio mañana', default=9.0)
+    morning_hours = fields.Integer(string='Horas mañana', default=4)
+    afternoon_start = fields.Float(string='Inicio tarde', default=17.0)
+    afternoon_hours = fields.Integer(string='Horas tarde', default=4)
+
     @api.model
     def get_config(self):
         config = self.search([], limit=1)
         if not config:
             config = self.create({})
         return config
+
+    @api.model
+    def action_open_config(self):
+        config = self.get_config()  # obtiene o crea el singleton
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Configuración',
+            'res_model': self._name,
+            'res_id': config.id,       # <-- fuerza abrir ESE registro
+            'view_mode': 'form',
+            'target': 'current',
+            'views': [(False, 'form')],
+        }
     
     def action_generate_bookings_manual(self):
         self.env['gym.booking']._generate_weekly_bookings(force=True)

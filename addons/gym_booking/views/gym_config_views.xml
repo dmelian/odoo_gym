@@ -5,7 +5,7 @@
         <field name="name">gym.config.form</field>
         <field name="model">gym.config</field>
         <field name="arch" type="xml">
-            <form string="Configuración del gimnasio">
+            <form string="Configuración del gimnasio" create="false" delete="false">
                 <header>
                     <button name="action_generate_bookings_manual"
                             string="Generar reservas ahora"
@@ -21,16 +21,35 @@
                                widget="float_time"
                                invisible="not auto_generate"/>
                     </group>
+                    <group string="Franjas horarias del gimnasio">
+                        <group string="Mañana">
+                            <field name="morning_start" widget="float_time"/>
+                            <field name="morning_hours"/>
+                        </group>
+                        <group string="Tarde">
+                            <field name="afternoon_start" widget="float_time"/>
+                            <field name="afternoon_hours"/>
+                        </group>
+                    </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="action_gym_config" model="ir.actions.act_window">
+    <!--record id="action_gym_config" model="ir.actions.act_window">
         <field name="name">Configuración</field>
         <field name="res_model">gym.config</field>
         <field name="view_mode">form</field>
         <field name="target">inline</field>
+    </record-->
+
+    <!-- Acción que llama al método Python -->
+    <record id="action_gym_config" model="ir.actions.server">
+        <field name="name">Configuración Gimnasio</field>
+        <field name="model_id" ref="model_gym_config"/>
+        <field name="binding_model_id" ref="model_gym_config"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_config()</field>
     </record>
 
 </odoo>

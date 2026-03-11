@@ -59,6 +59,7 @@
               parent="menu_gym_config"
               action="action_gym_schedule"
               sequence="20"/>
+              
     <menuitem id="menu_gym_config_settings"
             name="Configuración general"
             parent="menu_gym_config"
