@@ -1,0 +1,20 @@
+<odoo>
+  <template id="portal_gym_home" name="Gym - Mi Página">
+    <t t-call="portal.portal_layout">
+      <div class="container mt-4">
+
+        <t t-if="member">
+          <h2>Hola, <t t-esc="member.name"/> 👋</h2>
+          <p>Bienvenido a tu área de socio.</p>
+        </t>
+
+        <t t-else="">
+          <div class="alert alert-warning">
+            No se encontró ningún socio vinculado a tu usuario.
+          </div>
+        </t>
+
+      </div>
+    </t>
+  </template>
+</odoo>
