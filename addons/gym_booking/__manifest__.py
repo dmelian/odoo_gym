@@ -1,6 +1,6 @@
 {
     'name': 'Gym Booking',
-    'version': '18.0.1.0.0',
+    'version': '17.0.1.0.0',
     'summary': 'Gestión de reservas para gimnasios',
     'author': 'Domingo Melián',
     'category': 'Services',
@@ -19,6 +19,7 @@
         'views/gym_member_views.xml',
         'views/gym_subscription_views.xml',
         'views/gym_config_views.xml',
+        'views/gym_instructor_views.xml',
         'views/menu.xml',
         'views/portal_templates.xml',
     ],

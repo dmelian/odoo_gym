@@ -12,7 +12,7 @@
               parent="menu_gym_root"
               sequence="10"/>
 
-    <menuitem id="menu_gym_booking_list"
+    <menuitem id="menu_gym_booking_tree"
               name="Todas las reservas"
               parent="menu_gym_bookings"
               action="action_gym_booking"
@@ -30,17 +30,24 @@
               parent="menu_gym_root"
               sequence="20"/>
 
-    <menuitem id="menu_gym_member_list"
+    <menuitem id="menu_gym_member_tree"
               name="Abonados"
               parent="menu_gym_members"
               action="action_gym_member"
               sequence="10"/>
 
-    <menuitem id="menu_gym_subscription_list"
+    <menuitem id="menu_gym_subscription_tree"
               name="Suscripciones"
               parent="menu_gym_members"
               action="action_gym_subscription"
               sequence="20"/>
+
+    <menuitem id="menu_gym_instructors"
+             name="Monitores"
+             parent="menu_gym_members"
+             action="action_gym_instructors"
+             sequence="30"/>
+
 
     <!-- Menú Configuración -->
     <menuitem id="menu_gym_config"
@@ -48,13 +55,13 @@
               parent="menu_gym_root"
               sequence="30"/>
 
-    <menuitem id="menu_gym_activity_list"
+    <menuitem id="menu_gym_activity_tree"
               name="Actividades"
               parent="menu_gym_config"
               action="action_gym_activity"
               sequence="10"/>
 
-    <menuitem id="menu_gym_schedule_list"
+    <menuitem id="menu_gym_schedule_tree"
               name="Horarios"
               parent="menu_gym_config"
               action="action_gym_schedule"

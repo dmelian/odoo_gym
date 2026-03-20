@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========== VISTA LISTA ========== -->
+    <record id="view_gym_instructor_tree" model="ir.ui.view">
+        <field name="name">gym.instructor.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Monitores">
+                <field name="name"/>
+                <field name="full_name_x"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="city"/>
+                <field name="date_start_x"/>
+                <field name="gym_member_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ========== VISTA FORMULARIO ========== -->
+    <record id="view_gym_instructor_form" model="ir.ui.view">
+        <field name="name">gym.instructor.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Monitor">
+                <sheet>
+                    <!-- Foto de perfil, nativa de res.partner -->
+                    <field name="image_1920"
+                           widget="image"
+                           class="oe_avatar"/>
+
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Nombre del monitor"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Datos del gimnasio">
+                            <field name="gym_member_type"/>
+                            <field name="full_name_x"/>
+                            <field name="date_start_x"/>
+                        </group>
+                        <group string="Contacto">
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                        </group>
+                    </group>
+
+                    <group string="Dirección">
+                        <field name="street" placeholder="Calle"/>
+                        <field name="street2" placeholder="Piso, puerta..."/>
+                        <field name="zip" placeholder="Código postal"/>
+                        <field name="city" placeholder="Ciudad"/>
+                        <field name="state_id" placeholder="Provincia"/>
+                        <field name="country_id" placeholder="País"/>
+                    </group>
+
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- ========== ACCIÓN ========== -->
+    <record id="action_gym_instructors" model="ir.actions.act_window">
+        <field name="name">Monitores</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <!-- Solo muestra los partners que son monitores -->
+        <field name="domain">[('gym_member_type', '=', 'instructor')]</field>
+        <!-- Al crear uno nuevo, ya tiene el tipo puesto -->
+        <field name="context">{'default_gym_member_type': 'instructor'}</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_gym_instructor_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_gym_instructor_form')}),
+        ]"/>
+    </record>
+
+
+</odoo>

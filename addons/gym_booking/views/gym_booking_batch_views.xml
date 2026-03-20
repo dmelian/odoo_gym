@@ -2,11 +2,11 @@
 <odoo>
 
     <!-- Vista lista -->
-    <record id="view_gym_booking_batch_list" model="ir.ui.view">
-        <field name="name">gym.booking.batch.list</field>
+    <record id="view_gym_booking_batch_tree" model="ir.ui.view">
+        <field name="name">gym.booking.batch.tree</field>
         <field name="model">gym.booking.batch</field>
         <field name="arch" type="xml">
-            <list string="Lotes" create="false" edit="false" delete="false">
+            <tree string="Lotes" create="false" edit="false" delete="false">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="user_id"/>
@@ -15,7 +15,7 @@
                        decoration-success="origin == 'automatic'"/>
                 <field name="bookings_created"/>
                 <field name="bookings_skipped"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -45,14 +45,14 @@
                     <notebook>
                         <page string="Reservas generadas" name="bookings">
                             <field name="booking_ids">
-                                <list>
+                                <tree>
                                     <field name="name"/>
                                     <field name="member_id"/>
                                     <field name="activity_id"/>
                                     <field name="date"/>
                                     <field name="time_start" widget="float_time"/>
                                     <field name="state"/>
-                                </list>
+                                </tree>
                             </field>
                         </page>
                     </notebook>
@@ -65,7 +65,7 @@
     <record id="action_gym_booking_batch" model="ir.actions.act_window">
         <field name="name">Historial de lotes</field>
         <field name="res_model">gym.booking.batch</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Aún no se ha generado ningún lote de reservas

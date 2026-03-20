@@ -1,6 +1,7 @@
 services:
   web:
-    image: odoo:18.0
+    image: odoo:17.0
+    command: odoo --log-level=debug
     depends_on:
       - db
     ports:

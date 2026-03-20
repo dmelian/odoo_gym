@@ -2,11 +2,11 @@
 <odoo>
 
     <!-- Vista lista -->
-    <record id="view_gym_booking_list" model="ir.ui.view">
-        <field name="name">gym.booking.list</field>
+    <record id="view_gym_booking_tree" model="ir.ui.view">
+        <field name="name">gym.booking.tree</field>
         <field name="model">gym.booking</field>
         <field name="arch" type="xml">
-            <list string="Reservas"
+            <tree string="Reservas"
                   decoration-danger="state == 'cancelled'"
                   decoration-success="state == 'attended'"
                   decoration-info="state == 'confirmed'">
@@ -21,7 +21,7 @@
                        decoration-info="state == 'confirmed'"/>
                 <field name="origin"/>
                 <field name="batch_id"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -185,7 +185,7 @@
     <record id="action_gym_booking" model="ir.actions.act_window">
         <field name="name">Reservas</field>
         <field name="res_model">gym.booking</field>
-        <field name="view_mode">list,kanban,calendar,form</field>
+        <field name="view_mode">tree,kanban,calendar,form</field>
         <field name="search_view_id" ref="view_gym_booking_search"/>
         <field name="context">{'search_default_confirmed': 1}</field>
         <field name="help" type="html">
