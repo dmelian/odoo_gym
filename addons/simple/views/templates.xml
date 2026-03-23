@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mi_pagina_template" name="Mi Página">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <title>Mi Página</title>
+            </t>
+            <div class="container mt-4">
+                <h1>¡Hola desde mi página estática!</h1>
+                <p>Esta es una página web estática en Odoo 17.</p>
+            </div>
+        </t>
+    </template>
+</odoo>

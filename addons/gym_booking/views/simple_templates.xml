@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="inicio" name="Inicio">
+        <t t-call="web.layout">
+            <div class="container mt-5">
+                <h1>Hola desde mi página estática de inicio</h1>
+                <p>Esta página carga HTML, CSS y JS desde mi módulo.</p>
+
+                <button id="mi_boton" class="btn btn-primary">
+                    Haz clic aquí
+                </button>
+            </div>
+        </t>
+    </template>
+
+</odoo>

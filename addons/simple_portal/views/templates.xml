@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mi_pagina_template" name="Mi Página Portal">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">Mi Página</h5>
+                </t>
+                <t t-set="card_body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Hola desde el portal</h1>
+                            <p>Solo usuarios del portal pueden ver esto.</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="mi_pagina2_template" name="Mi Página 2 Portal">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">Mi Página 2</h5>
+                </t>
+                <t t-set="card_body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Pagina 2</h1>
+                            <p>Solo para tus ojos.</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <!-- Hereda el menú del portal para añadir tu entrada -->
+    <template id="portal_my_home_entry" 
+            inherit_id="portal.portal_my_home"
+            customize_show="True"
+            name="Mi Página en Portal">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Mi Página</t>
+                <t t-set="icon" t-value="'/portal/static/src/img/portal-addresses.svg'"/>
+                <t t-set="url">/my/mi-pagina</t>
+                <t t-set="text">Mi página del portal</t>
+                <t t-set="config_card" t-value="True"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Mi Página 2</t>
+                <t t-set="url">/my/mi-pagina2</t>
+                <t t-set="icon" t-value="'/portal/static/src/img/portal-addresses.svg'"/>
+                <t t-set="text">Mi página 2 del portal</t>
+                <t t-set="config_card" t-value="True"/>
+                <!-- Nombre del contador, debe coincidir con la key en _prepare_home_portal_values -->
+                <t t-set="placeholder_count" t-value="'mi_count'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+
+        </xpath>
+    </template>
+
+
+</odoo>

@@ -4,7 +4,7 @@
     'summary': 'Gestión de reservas para gimnasios',
     'author': 'Domingo Melián',
     'category': 'Services',
-    'depends': ['base', 'mail', 'portal'], 
+    'depends': ['base', 'mail', 'website'], 
     # ponemos mail por el chatter - para tener el historial de cambios en las reservas
     # también pondremos website cuando haga falta.
     'data': [
@@ -21,7 +21,8 @@
         'views/gym_config_views.xml',
         'views/gym_instructor_views.xml',
         'views/menu.xml',
-        'views/portal_templates.xml',
+ #       'views/portal_templates.xml',
+        'views/simple_templates.xml',
     ],
     'demo': [
         'demo/gym_activity_demo.xml',
